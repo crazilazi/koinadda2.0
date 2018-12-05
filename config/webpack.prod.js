@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const helpers = require('./helpers');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 /*
  * We've enabled MiniCssExtractPlugin for you. This allows your app to
@@ -48,46 +49,53 @@ module.exports = {
 	resolve: {
 		extensions: ['.webpack.js', '.web.js', '.ts', '.js', '.html', '.css']
 	},
+	plugins: [
+		new CopyWebpackPlugin([
+			{ from: './node_modules/jquery/dist/jquery.min.js', to: './jquery.min.js' },
+			{ from: './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js', to: './bootstrap.bundle.min.js' }
+		])
+	],
 	module: {
+
 		rules: [{
-				include: [path.resolve(__dirname, 'app')],
-				loader: 'babel-loader',
+			include: [path.resolve(__dirname, 'app')],
+			loader: 'babel-loader',
 
-				options: {
-					plugins: ['syntax-dynamic-import'],
+			options: {
+				plugins: ['syntax-dynamic-import'],
 
-					presets: [
-						[
-							'env',
-							{
-								modules: false
-							}
-						]
-					]
-				},
-
-				test: /\.js$/
-			},
-			{
-				test: /\.css$/,
-
-				use: [{
-						loader: MiniCssExtractPlugin.loader
-					},
-					{
-						loader: 'css-loader',
-
-						options: {
-							sourceMap: true
+				presets: [
+					[
+						'env',
+						{
+							modules: false
 						}
-					}
+					]
 				]
 			},
-			{
-				test: /\.ts$/,
-				exclude: /node_modules/,
-				loader: 'awesome-typescript-loader'
+
+			test: /\.js$/
+		},
+		{
+			test: /\.css$/,
+
+			use: [{
+				loader: MiniCssExtractPlugin.loader
 			},
+			{
+				loader: 'css-loader',
+
+				options: {
+					sourceMap: true
+				}
+			}
+			]
+		},
+		{
+			test: /\.ts$/,
+			exclude: /node_modules/,
+			loader: 'awesome-typescript-loader'
+		},
 		]
 	},
 
