@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config config/webpack.prod.js --hot --inline",
+    "webpack-watch": "./node_modules/.bin/webpack --watch --config ./config/webpack.prod.js",
     "webpack": "./node_modules/.bin/webpack --config ./config/webpack.prod.js"
   },
   "keywords": [],
@@ -27,6 +28,7 @@
     "babel-loader": "^8.0.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.7.0",
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.0",
     "mini-css-extract-plugin": "^0.4.3",
     "script-loader": "^0.7.2",

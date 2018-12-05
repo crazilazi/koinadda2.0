@@ -48,38 +48,41 @@ $(() => {
                   .append($("<span>", { text: crpto.name, class: "text" })),
                 ),
             ).append(
-              $("<div>", { class: "card-body" }).append(
-                $("<h5>", { class: "card-title", text: "Exchange Prices" }),
-              ).append(
-                $("<div>", { class: "table-responsive" })
-                  .append(
-                    $("<table>", { class: "table" })
-                      .append($("<thead>")
-                        .append($("<tr>")
-                          .append(
-                            // append header here
-                            crpto.exchage.map((item) => {
-                              return $("<th>", { text: item.shortname });
-                            }),
+              $("<div>", { class: "card-body" })
+                .append(
+                  $("<div>", { class: "table-responsive" })
+                    .append(
+                      $("<table>", { class: "table" })
+                        .append($("<thead>")
+                          .append($("<tr>")
+                            .append(
+                              // append header here
+                              crpto.exchage.map((item) => {
+                                return $("<th>",
+                                  {
+                                    "text": item.shortname, "title": item.name,
+                                    "data-toggle": "tooltip",
+                                  });
+                              }),
+                            ),
+                          ),
+                        )
+                        .append($("<tbody>")
+                          .append($("<tr>")
+                            .append(
+                              // append body here
+                              crpto.exchage.map((item) => {
+                                return $("<td>")
+                                  .append($("<a>", {
+                                    text: item.lastprice + "₹",
+                                    target: "_blank", href: item.url,
+                                  }));
+                              }),
+                            ),
                           ),
                         ),
-                      )
-                      .append($("<tbody>")
-                        .append($("<tr>")
-                          .append(
-                            // append body here
-                            crpto.exchage.map((item) => {
-                              return $("<td>")
-                                .append($("<a>", {
-                                  text: item.lastprice + "₹",
-                                  target: "_blank", href: item.url,
-                                }));
-                            }),
-                          ),
-                        ),
-                      ),
-                  ),
-              ).addClass(classes[Math.floor(Math.random() * classes.length)]),
+                    ),
+                ).addClass(classes[Math.floor(Math.random() * classes.length)]),
             ),
           ));
       }
@@ -89,6 +92,7 @@ $(() => {
         koins.shift();
       }
     }
+    $('[data-toggle="tooltip"]').tooltip({ placement: "auto" });
     chooseFavs();
   };
 
