@@ -3,10 +3,10 @@
 > A chrome extension to track crpto on indian exchnage
 
 ## How to compile?
+
+```bash
 npm install
 npm run webpack
-```bash
-
 ```
 
 ## How to use?
